@@ -1,0 +1,56 @@
+
+body{
+    margin: 0px;
+    padding: 2rem 4rem;
+    background-color: #dedede;
+    font-family: 'Roboto', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: .875rem;
+}
+.header{
+    text-align: center;
+    padding: 20px;
+}
+.budgetform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.budgetFormDiv {    
+    /* width: 50%;     */
+    height: 100%;
+    padding: 40px;
+    background-color: #f1f1f1;
+}
+
+.budgetformBox{
+    border: 1px solid;
+    padding: 25px;
+} 
+.text-center{
+    text-align: center;
+}
+.inputBox{
+    margin: 0px 0px 30px 0px;
+}
+.formInput{
+    padding: 4px;
+}
+.budgetFormTable{
+    margin: 10px 0px 0px 0px;
+}
+.budgetFormTable tr th{
+    padding: 10px;
+}
+.budgetFormTable tr td{
+    padding: 10px;
+}
+.pt-1{
+    padding-top: 20px;
+}
+.btn{
+    padding: 8px 16px;
+    cursor: pointer;
+}
