@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {updateExpenseName, updateCategory, updateExpenseAmt, addExpenses, addExpenseByCategory} from "../../redux/expenseSlice";
+import {updateExpenseName, updateCategory, updateExpenseAmt, addExpenses, updateExpenseByCategory} from "../../redux/expenseSlice";
 import { categories } from '../../categories';
 import toast from 'react-hot-toast';
 
@@ -34,29 +34,40 @@ function ExpenseForm() {
     const handleSubmit = (e) => {
         e.preventDefault();  
         if(validateForm()){
-            const totalExpense = parseInt(expense_amt)+parseInt(expenseByCategory[category]);
-            dispatch(addExpenses({_id: Date.now(), expense_name, category, expense_amt}));
-            dispatch(addExpenseByCategory({[category]: totalExpense}))
+            if(window.confirm("Do you want to add new Expense?")){
+                const totalExpense = parseInt(expense_amt)+parseInt(expenseByCategory[category]);
+                dispatch(addExpenses({_id: Date.now(), expense_name, category, expense_amt}));
+                dispatch(updateExpenseByCategory({[category]: totalExpense}));
+                toast.success("Expense added successfully");
+
+                dispatch(updateExpenseName(""));
+                dispatch(updateCategory(""));
+                dispatch(updateExpenseAmt(""));
+            }            
         }
     };
     return (
-        <div>
-            <h4>New Expense Form</h4>
+        <div style={{margin: "40px 0px"}}>
+            <h3 className='title'>New Expense Form</h3>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Expense Name: </label>
-                    <input type="text" id="expense_name" onChange={(e)=>dispatch(updateExpenseName(e.target.value))} value={expense_name}/>
-                
-                    <label>Select Category</label>
-                    <select id="category" onChange={(e)=>dispatch(updateCategory(e.target.value))} value={category}>
-                        <option value={""}>--select--</option>
-                        {categories.map((cat, index)=>(
-                            <option key={index} value={cat.id}>{cat.name}</option>
-                        ))}
-                    </select>
-                
-                    <label>Expense Amount</label>
-                    <input type="text" id="expense_amt" onChange={(e)=>dispatch(updateExpenseAmt(e.target.value))} value={expense_amt} />
+                <div style={{display:"flex", gap:"40px",}}>
+                    <div>
+                        <label htmlFor='expense-name'>Expense Name: </label>
+                        <input type="text" id="expense-name" onChange={(e)=>dispatch(updateExpenseName(e.target.value))} value={expense_name} className='formInput'/>
+                    </div>
+                    <div>
+                        <label htmlFor='category-select'>Select Category: </label>
+                        <select id="category-select" onChange={(e)=>dispatch(updateCategory(e.target.value))} value={category} className='formInput'>
+                            <option value={""}>--select--</option>
+                            {categories.map((cat, index)=>(
+                                <option key={index} value={cat.id}>{cat.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor='expense-amount'>Expense Amount: </label>
+                        <input type="text" id="expense-amount" onChange={(e)=>dispatch(updateExpenseAmt(e.target.value))} value={expense_amt} className='formInput'/>
+                    </div>
                 </div>
                 <div className='text-center pt-1'>
                     <button type="submit" className='btn'>Submit</button>

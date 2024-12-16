@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { categories } from '../../categories';
 import { useSelector } from 'react-redux';
 
@@ -7,14 +7,12 @@ import { useSelector } from 'react-redux';
 function MonthlyExpenditure() {
 
     const monthlyBudget = useSelector((state)=> state.user.monthlyBudget);
-    const monthlyExpense = 0;
-    const monthlyBal = 0;
-    const categoricalBudget = useSelector((state)=> state.user.categoricalBudget);
-    // const expenses = useSelector((state)=> state.expense.expenses);
+    const monthlyExpense = useSelector((state)=> state.expense.monthlyExpense);
+    const monthlyBal = useSelector((state)=> state.expense.monthlyBalance);
+    const categoricalBudget = useSelector((state)=> state.user.categoricalBudget); 
     const expenseByCategory = useSelector((state) => state.expense.expenseByCategory);
-    useEffect(()=>{
-        console.log(expenseByCategory);
-    },[expenseByCategory]);
+    
+    
     return (
         <div className='p-2'>
             <table className='table' cellSpacing="0" border="1">

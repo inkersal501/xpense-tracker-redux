@@ -20,6 +20,7 @@ body{
 }
 main {
     background-color: #f1f1f1;
+    padding: 50px; 
 }
 .budgetform{    
     height: 100%;
@@ -56,13 +57,10 @@ main {
     padding: 8px 16px;
     cursor: pointer;
 }
-.p-2{
-    padding: 20px;
-}
-.filterPills{
-    /* display: flex; */
-    /* gap: 10px; */
-}
+ 
+/* .filterPills{
+ 
+} */
 .filterPill{
     border-radius: 20px;
     border: 1px solid #ccc;
@@ -70,6 +68,12 @@ main {
     cursor: pointer;
     margin: 0px 10px;
 }
+.filterPill:hover{
+    background-color: #dedede;
+}
 .filterPill.active{
     background-color: #ccc;
+}
+.title{
+    text-decoration: underline;
 }

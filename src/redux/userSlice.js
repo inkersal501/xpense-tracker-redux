@@ -11,7 +11,8 @@ const userSlice = createSlice({
             travel :"",
             entertainment :"",
             others :"",
-        }
+        },
+        editMonthlyBudget: false,
     },
     reducers: {
         updateUsername: (state, action) => {
@@ -23,8 +24,11 @@ const userSlice = createSlice({
         updateCategoricalBudget: (state, action) => {
             state.categoricalBudget = {...state.categoricalBudget, ...action.payload}; 
         },
+        updateEditMonthlyBudget: (state, action) => {
+            state.editMonthlyBudget = action.payload; 
+        },
     }
 
 });
-export const { updateUsername, updateMonthlyBudget, updateCategoricalBudget } = userSlice.actions;
+export const { updateUsername, updateMonthlyBudget, updateCategoricalBudget, updateEditMonthlyBudget } = userSlice.actions;
 export default userSlice.reducer;

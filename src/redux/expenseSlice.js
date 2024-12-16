@@ -13,7 +13,15 @@ const expenseSlice = createSlice({
             travel : 0,
             entertainment : 0,
             others : 0,
-        }
+        },
+        balanceByCategory: {
+            food : 0,
+            travel : 0,
+            entertainment : 0,
+            others : 0,
+        },
+        monthlyExpense: 0,
+        monthlyBalance: 0,
     },
     reducers: {
         updateExpenseName : (state, action) => {
@@ -28,8 +36,17 @@ const expenseSlice = createSlice({
         addExpenses : (state, action) => {
             state.expenses = [...state.expenses, action.payload];
         },
-        addExpenseByCategory: (state, action) => {
+        updateExpenseByCategory: (state, action) => {
             state.expenseByCategory = {...state.expenseByCategory, ...action.payload};
+        },
+        updateBalanceByCategory: (state, action) => {
+            state.balanceByCategory = {...state.balanceByCategory, ...action.payload};
+        },
+        updateMonthlyExpense : (state, action) => {
+            state.monthlyExpense = action.payload;
+        },
+        updateMonthlyBalance : (state, action) => {
+            state.monthlyBalance = action.payload;
         },
         deleteExpense: (state, action) => {
             const id = action.payload;
@@ -43,6 +60,6 @@ const expenseSlice = createSlice({
         },
     }
 });
-export const {updateExpenseName, updateCategory, updateExpenseAmt, 
-    addExpenses, addExpenseByCategory, updateExpenseFilterCategory, deleteExpense} = expenseSlice.actions;
+export const { updateExpenseName, updateCategory, updateExpenseAmt, updateMonthlyExpense, updateMonthlyBalance,
+    addExpenses, updateExpenseByCategory, updateBalanceByCategory, updateExpenseFilterCategory, deleteExpense } = expenseSlice.actions;
 export default expenseSlice.reducer;
