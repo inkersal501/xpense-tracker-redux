@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {updateExpenseName, updateCategory, updateExpenseAmt, addExpenses, updateExpenseByCategory} from "../../redux/expenseSlice";
+import {updateExpenseName, updateCategory, updateExpenseAmt, addExpenses, updateCategoricalExpense} from "../../redux/expenseSlice";
 import { categories } from '../../categories';
 import toast from 'react-hot-toast';
 
@@ -11,7 +11,7 @@ function ExpenseForm() {
     const expense_name = useSelector((state) => state.expense.expense_name);
     const category = useSelector((state) => state.expense.category);
     const expense_amt = useSelector((state) => state.expense.expense_amt);
-    const expenseByCategory = useSelector((state) => state.expense.expenseByCategory);
+    const categoricalExpense = useSelector((state) => state.expense.categoricalExpense);
 
     const validateForm = () => {
         let alertMsg = ""; 
@@ -35,9 +35,9 @@ function ExpenseForm() {
         e.preventDefault();  
         if(validateForm()){
             if(window.confirm("Do you want to add new Expense?")){
-                const totalExpense = parseInt(expense_amt)+parseInt(expenseByCategory[category]);
+                const totalExpense = parseInt(expense_amt)+parseInt(categoricalExpense[category]);
                 dispatch(addExpenses({_id: Date.now(), expense_name, category, expense_amt}));
-                dispatch(updateExpenseByCategory({[category]: totalExpense}));
+                dispatch(updateCategoricalExpense({[category]: totalExpense}));
                 toast.success("Expense added successfully");
 
                 dispatch(updateExpenseName(""));
@@ -49,14 +49,14 @@ function ExpenseForm() {
     return (
         <div style={{margin: "40px 0px"}}>
             <h3 className='title'>New Expense Form</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='expense-form1'>
                 <div style={{display:"flex", gap:"40px",}}>
                     <div>
-                        <label htmlFor='expense-name'>Expense Name: </label>
+                        <label htmlFor='expense-name'>Expense Name:</label>
                         <input type="text" id="expense-name" onChange={(e)=>dispatch(updateExpenseName(e.target.value))} value={expense_name} className='formInput'/>
                     </div>
                     <div>
-                        <label htmlFor='category-select'>Select Category: </label>
+                        <label htmlFor='category-select'>Select Category:</label>
                         <select id="category-select" onChange={(e)=>dispatch(updateCategory(e.target.value))} value={category} className='formInput'>
                             <option value={""}>--select--</option>
                             {categories.map((cat, index)=>(
@@ -65,7 +65,7 @@ function ExpenseForm() {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor='expense-amount'>Expense Amount: </label>
+                        <label htmlFor='expense-amount'>Expense Amount:</label>
                         <input type="text" id="expense-amount" onChange={(e)=>dispatch(updateExpenseAmt(e.target.value))} value={expense_amt} className='formInput'/>
                     </div>
                 </div>

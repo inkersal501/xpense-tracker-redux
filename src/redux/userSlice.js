@@ -4,19 +4,19 @@ const userSlice = createSlice({
 
     name: "user",
     initialState: {
-        username : "",
+        userName : "",
         monthlyBudget : "",
         categoricalBudget: {
             food :"",
             travel :"",
             entertainment :"",
-            others :"",
         },
         editMonthlyBudget: false,
+        activeFilter: "all",
     },
     reducers: {
-        updateUsername: (state, action) => {
-            state.username = action.payload; 
+        updateUserName: (state, action) => { 
+            state.userName = action.payload; 
         },
         updateMonthlyBudget: (state, action) => {
             state.monthlyBudget = action.payload; 
@@ -27,8 +27,20 @@ const userSlice = createSlice({
         updateEditMonthlyBudget: (state, action) => {
             state.editMonthlyBudget = action.payload; 
         },
+        updateActiveFilter: (state, action) => {
+            state.activeFilter = action.payload; 
+        },
+        resetAllBudget: (state, action) => {
+            state.username = "";
+            state.monthlyBudget = "";
+            state.categoricalBudget = {
+                food :"",
+                travel :"",
+                entertainment :"",
+            };
+        },
     }
 
 });
-export const { updateUsername, updateMonthlyBudget, updateCategoricalBudget, updateEditMonthlyBudget } = userSlice.actions;
+export const { updateUserName, updateMonthlyBudget, updateCategoricalBudget, updateEditMonthlyBudget, updateActiveFilter, resetAllBudget } = userSlice.actions;
 export default userSlice.reducer;

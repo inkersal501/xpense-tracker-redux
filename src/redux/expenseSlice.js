@@ -2,13 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const expenseSlice = createSlice({
     name: "expense",
-    initialState: {
-        expense_name: "",
-        category: "",
-        expense_amt: "",
-        expenses: [],
+    initialState: { 
+        transactionList: [],
         expenseFilterCategory : "all",
-        expenseByCategory: {
+        totalExpense: 0,
+        categoricalExpense: {
             food : 0,
             travel : 0,
             entertainment : 0,
@@ -20,25 +18,37 @@ const expenseSlice = createSlice({
             entertainment : 0,
             others : 0,
         },
-        monthlyExpense: 0,
+        
         monthlyBalance: 0,
     },
     reducers: {
+        updateTotalExpense: (state, action) => {
+            state.totalExpense = action.payload;
+        },
+        updateCategoricalExpense: (state, action) => {
+            state.categoricalExpense = {
+                food : 0,
+                travel : 0,
+                entertainment : 0,
+                others : 0,
+            };
+        },
+        resetAllExpense: (state, action) => {
+            state.categoricalExpense = {...state.categoricalExpense, ...action.payload};
+        },
         updateExpenseName : (state, action) => {
-            state.expense_name = action.payload;
+            state.expenseName = action.payload;
         },
         updateCategory : (state, action) => {
-            state.category = action.payload;
+            state.expenseCategory = action.payload;
         },
         updateExpenseAmt : (state, action) => {
             state.expense_amt = action.payload;
         },
-        addExpenses : (state, action) => {
+        transactionList : (state, action) => {
             state.expenses = [...state.expenses, action.payload];
         },
-        updateExpenseByCategory: (state, action) => {
-            state.expenseByCategory = {...state.expenseByCategory, ...action.payload};
-        },
+        
         updateBalanceByCategory: (state, action) => {
             state.balanceByCategory = {...state.balanceByCategory, ...action.payload};
         },

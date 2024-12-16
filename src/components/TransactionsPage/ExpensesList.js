@@ -8,7 +8,7 @@ function ExpensesList() {
     const expenses = useSelector((state) => state.expense.expenses);
     
     const [dExpenses, setDExpenses] = useState([...expenses]);
-    const filterCategory = useSelector((state) => state.expense.expenseFilterCategory);
+    const filterCategory = useSelector((state) => state.user.activeFilter);
     const dispatch = useDispatch();
     // const
     useEffect(()=>{
