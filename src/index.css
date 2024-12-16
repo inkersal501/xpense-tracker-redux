@@ -59,3 +59,17 @@ main {
 .p-2{
     padding: 20px;
 }
+.filterPills{
+    /* display: flex; */
+    /* gap: 10px; */
+}
+.filterPill{
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    cursor: pointer;
+    margin: 0px 10px;
+}
+.filterPill.active{
+    background-color: #ccc;
+}

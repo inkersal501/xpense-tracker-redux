@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUsername, updateMonthlyBudget, updateCategoricalBudget } from "../../redux/userSlice";
-import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { categories } from '../../categories';
+import toast from 'react-hot-toast';
 
 function Form() {
 
@@ -12,12 +12,16 @@ function Form() {
     const categoricalBudget = useSelector((state)=> state.user.categoricalBudget);
     
     const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { enqueueSnackbar } = useSnackbar();
+    const navigate = useNavigate(); 
     
     const validateForm = () => {
         let alertMsg = ""; 
-        let sum = categories.reduce((acc, element) => acc + parseInt(categoricalBudget[element.id]), 0);
+        let sum = 0;
+        // eslint-disable-next-line
+        for (const [key, value] of Object.entries(categoricalBudget)){          
+            sum += parseInt(value);
+        }
+
         if(username === "" )
             alertMsg = "Please Enter Your Name";
         else if(monthlyBudget === "")
@@ -30,7 +34,7 @@ function Form() {
             alertMsg = "Total Categorical budget should not exceed monthly budget";
      
         if(alertMsg !== "")
-            enqueueSnackbar(alertMsg, {variant: 'error'});
+            toast.error(alertMsg);
         else
             return true;
         
