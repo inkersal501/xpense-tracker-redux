@@ -8,23 +8,25 @@ body{
     -moz-osx-font-smoothing: grayscale;
     font-size: .875rem;
 }
+.page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .header{
     text-align: center;
     padding: 20px;
 }
-.budgetform{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-.budgetFormDiv {    
-    /* width: 50%;     */
-    height: 100%;
-    padding: 40px;
+main {
     background-color: #f1f1f1;
 }
-
+.budgetform{    
+    height: 100%;
+}
+.budgetFormDiv {   
+    padding: 40px;    
+}
 .budgetformBox{
     border: 1px solid;
     padding: 25px;
@@ -38,13 +40,13 @@ body{
 .formInput{
     padding: 4px;
 }
-.budgetFormTable{
+.table{
     margin: 10px 0px 0px 0px;
 }
-.budgetFormTable tr th{
+.table tr th{
     padding: 10px;
 }
-.budgetFormTable tr td{
+.table tr td{
     padding: 10px;
 }
 .pt-1{
@@ -53,4 +55,21 @@ body{
 .btn{
     padding: 8px 16px;
     cursor: pointer;
+}
+.p-2{
+    padding: 20px;
+}
+.filterPills{
+    /* display: flex; */
+    /* gap: 10px; */
+}
+.filterPill{
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    cursor: pointer;
+    margin: 0px 10px;
+}
+.filterPill.active{
+    background-color: #ccc;
 }
