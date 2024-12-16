@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header() {
+function PageHeader() {
   return (
     <div className='header'>
         <h1>xTracker</h1>        
@@ -8,4 +8,4 @@ function Header() {
   )
 }
 
-export default Header;
+export default PageHeader;

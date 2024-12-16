@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateUsername, updateMonthlyBudget, updateCategoricalBudget } from "../../redux/userSlice";
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-
-const categories = [
-    {name : "Food", id: "food"},{name : "Travel", id: "travel"},
-    {name : "Entertainment", id: "entertainment"},{name : "Others", id: "others"},
-];
+import { categories } from '../../categories';
 
 function Form() {
 
@@ -66,7 +62,7 @@ function Form() {
                         </div>
                         <div>
                             <label>Fill your monthly categorical budget: </label>
-                            <table border="1" cellSpacing="0" className='budgetFormTable'>
+                            <table border="1" cellSpacing="0" className='table'>
                                 <thead>
                                     <tr>
                                         {categories.map((cat, index)=>(

@@ -1,12 +1,14 @@
 import React from 'react'
 import Form from './Form';
-import Header from './Header';
+import PageHeader from '../PageHeader';
 
 function LandingPage() {
   return (
-    <div>
-        <Header />
-        <Form />
+    <div className='page'>
+        <PageHeader />
+        <main>
+          <Form />
+        </main>        
     </div>
   )
 }
