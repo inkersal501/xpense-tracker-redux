@@ -22,9 +22,13 @@ const expenseSlice = createSlice({
         },
         updateCategoricalExpense: (state, action) => {
             const data = action.payload;
-            const category = state.categoricalExpense[data.category];
-
-            state.categoricalExpense =  {...state.categoricalExpense, };
+            let amount = state.categoricalExpense[data.category];
+            if(data.operation === "add"){
+                amount = amount + Number(data.amount);
+            }else{
+                amount = amount - Number(data.amount);
+            } 
+            state.categoricalExpense =  {...state.categoricalExpense, [data.category]: amount };
         },
         resetAllExpense: (state, action) => {
             state.categoricalExpense = {...state.categoricalExpense, ...action.payload};

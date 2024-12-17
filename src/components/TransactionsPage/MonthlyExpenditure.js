@@ -8,8 +8,19 @@ function MonthlyExpenditure() {
 
     const monthlyBudget = useSelector((state)=> state.user.monthlyBudget);
     const totalExpense  = useSelector((state)=> state.expense.totalExpense);
+    const categoricalExpense = useSelector((state)=> state.expense.categoricalExpense);
     const categoricalBudget = useSelector((state)=> state.user.categoricalBudget);  
     
+    const getBalance = (budget, expense) => {
+        return budget-expense;
+    }
+    const getStatus = (budget, expense) => {
+
+        return expense<budget?"within":"not within";
+    }
+    const getStatusColor = (budget, expense) => {
+        return expense<budget?"success-btn":"danger-btn";
+    }
     
     return (
         <div className='p-2'>
@@ -26,18 +37,22 @@ function MonthlyExpenditure() {
                 <tbody>
                     <tr>
                         <td>All</td>
-                        <td></td>
+                        <td>
+                            <button className={getStatusColor(monthlyBudget, totalExpense)}>{getStatus(monthlyBudget, totalExpense)}</button>
+                        </td>
                         <td>{monthlyBudget}</td>
                         <td>{totalExpense}</td>
-                        <td>{""}</td>
+                        <td>{getBalance(monthlyBudget, totalExpense)}</td>
                     </tr>
                     {categories.map((cat, index)=>(
                         <tr key={index}>
                             <td>{cat.name}</td>
-                            <td></td>
+                            <td>
+                                <button className={getStatusColor(categoricalBudget[cat.id], categoricalExpense[cat.id])}>{getStatus(categoricalBudget[cat.id], categoricalExpense[cat.id])}</button>
+                            </td>
                             <td>{categoricalBudget[cat.id]}</td>
-                            <td>{""}</td>
-                            <td></td>
+                            <td>{categoricalExpense[cat.id]}</td>
+                            <td>{getBalance(categoricalBudget[cat.id], categoricalExpense[cat.id])}</td>
                         </tr> 
                     ))}
                     <tr>

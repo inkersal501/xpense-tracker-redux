@@ -77,3 +77,17 @@ main {
 .title{
     text-decoration: underline;
 }
+.success-btn{
+    padding: 8px 16px;
+    border-radius: 20px;
+    background-color: green;
+    color: #fff;
+    border: 1px solid;
+}
+.danger-btn{
+    padding: 8px 16px;
+    border-radius: 20px;
+    background-color: red;
+    color: #fff;
+    border: 1px solid;
+}

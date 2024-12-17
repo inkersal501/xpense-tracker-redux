@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import ExpensesFilter from './ExpensesFilter'; 
 import { removeTransactionEntry } from '../../redux/transactionSlice';
-import { updateTotalExpense } from '../../redux/expenseSlice';
+import { updateTotalExpense, updateCategoricalExpense } from '../../redux/expenseSlice';
  
 function ExpensesList() {
 
@@ -23,9 +23,11 @@ function ExpensesList() {
         }        
     },[filterCategory, transactionList]);
 
-    const deleteEntry = (id, amount) => {
+    const deleteEntry = (id, amount, category) => {
         dispatch(removeTransactionEntry(id));
-        dispatch(updateTotalExpense({amount, operation: "subtract"}));
+        const updateTotal = { amount, operation: "subtract" };        
+        dispatch(updateTotalExpense(updateTotal));
+        dispatch(updateCategoricalExpense({...updateTotal, category}));
     };
     return (
         <div>
@@ -47,7 +49,7 @@ function ExpensesList() {
                             <td>{transaction.name}</td>
                             <td>{transaction.category}</td>
                             <td>{transaction.amount}</td>
-                            <td><button type='button' className='btn' onClick={()=>deleteEntry(transaction.id, transaction.amount)}>Delete</button></td>
+                            <td><button type='button' className='btn' onClick={()=>deleteEntry(transaction.id, transaction.amount, transaction.category)}>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>
