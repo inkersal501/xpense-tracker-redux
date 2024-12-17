@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import ExpensesFilter from './ExpensesFilter';
-import { deleteExpense } from '../../redux/expenseSlice';
-
+import ExpensesFilter from './ExpensesFilter'; 
+import { removeTransactionEntry } from '../../redux/transactionSlice';
+import { updateTotalExpense } from '../../redux/expenseSlice';
+ 
 function ExpensesList() {
 
-    const expenses = useSelector((state) => state.expense.expenses);
+    const transactionList = useSelector((state) => state.transaction.transactionList);
     
-    const [dExpenses, setDExpenses] = useState([...expenses]);
-    const filterCategory = useSelector((state) => state.expense.expenseFilterCategory);
+    const [transactions, setTransactions] = useState([...transactionList]);
+    const filterCategory = useSelector((state) => state.user.activeFilter);
     const dispatch = useDispatch();
-    // const
+  
     useEffect(()=>{
         if(filterCategory === "all"){
-            setDExpenses([...expenses]);
+            setTransactions([...transactionList]);
         }else{
-            const filter = expenses.filter((expense)=>{
+            const filter = transactionList.filter((expense)=>{
                 return expense.category === filterCategory;
             });
-            setDExpenses([...filter]);
+            setTransactions([...filter]);
         }        
-    },[filterCategory, expenses]);
+    },[filterCategory, transactionList]);
+
+    const deleteEntry = (id, amount) => {
+        dispatch(removeTransactionEntry(id));
+        dispatch(updateTotalExpense({amount, operation: "subtract"}));
+    };
     return (
         <div>
             <ExpensesFilter />
@@ -35,13 +41,13 @@ function ExpensesList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {dExpenses.map((expense, index)=>(
+                    {transactions.map((transaction, index)=>(
                         <tr key={index}>
                             <td>{index+1}</td>
-                            <td>{expense.expense_name}</td>
-                            <td>{expense.category}</td>
-                            <td>{expense.expense_amt}</td>
-                            <td><button type='button' className='btn' onClick={()=>dispatch(deleteExpense(expense._id))}>Delete</button></td>
+                            <td>{transaction.name}</td>
+                            <td>{transaction.category}</td>
+                            <td>{transaction.amount}</td>
+                            <td><button type='button' className='btn' onClick={()=>deleteEntry(transaction.id, transaction.amount)}>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>

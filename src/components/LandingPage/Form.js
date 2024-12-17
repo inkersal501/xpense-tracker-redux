@@ -1,16 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUsername, updateMonthlyBudget, updateCategoricalBudget } from "../../redux/userSlice";
+import { updateUserName, updateMonthlyBudget, updateCategoricalBudget, updateEditMonthlyBudget, resetAllBudget } from "../../redux/userSlice";
 import { useNavigate } from 'react-router-dom';
 import { categories } from '../../categories';
 import toast from 'react-hot-toast';
 
 function Form() {
 
-    const username = useSelector((state)=> state.user.username);
+    const userName = useSelector((state)=> state.user.userName);
     const monthlyBudget = useSelector((state)=> state.user.monthlyBudget);
     const categoricalBudget = useSelector((state)=> state.user.categoricalBudget);
-    
+    const editMonthlyBudget = useSelector((state)=> state.user.editMonthlyBudget);
+
     const dispatch = useDispatch();
     const navigate = useNavigate(); 
     
@@ -22,7 +23,7 @@ function Form() {
             sum += parseInt(value);
         }
 
-        if(username === "" )
+        if(userName === "" )
             alertMsg = "Please Enter Your Name";
         else if(monthlyBudget === "")
             alertMsg = "Please Enter Your Monthly Budget";
@@ -49,19 +50,26 @@ function Form() {
         } 
     };
 
+    const newTracker = () => {
+        if(window.confirm("This will delete all previous transactions")){
+            dispatch(resetAllBudget());
+            dispatch(updateEditMonthlyBudget(false));
+            toast.success("Deleted all previous transactions");
+        }
+    };
     return (
         <div className='budgetform'>
-            <div className='budgetFormDiv'>
+            <div className=''>
                 <h3 className='text-center'>Welcome to your own expense tracker</h3>
                 <h4 className='text-center'>Please fill in the below form to start tracking</h4>
                 <div className='budgetformBox'>
                     <form name="landing-page-form" onSubmit={handleSubmit}>
                         <div className='inputBox'>
-                            <label>Enter your name: </label>
-                            <input type="text" id="name" className='formInput' onChange={(e)=>dispatch(updateUsername(e.target.value))} value={username}/>
+                            <label htmlFor='name'>Enter your name: </label>
+                            <input type="text" id="name" className='formInput' onChange={(e)=>dispatch(updateUserName(e.target.value))} value={userName}/>
                         </div>
                         <div className='inputBox'>
-                            <label>Enter your monthly budget: </label>
+                            <label htmlFor='budget'>Enter your monthly budget: </label>
                             <input type="text" id="budget" className='formInput' onChange={(e)=>dispatch(updateMonthlyBudget(parseInt(e.target.value)))} value={monthlyBudget}/>
                         </div>
                         <div>
@@ -86,7 +94,15 @@ function Form() {
                             </table>
                         </div>
                         <div className='text-center pt-1'>
-                            <button type="submit" className='btn'>Submit</button>
+                            {!editMonthlyBudget ?
+                                <button type="submit" className='btn'>Submit</button>
+                            :
+                            <div style={{display:"flex", gap:"20px", justifyContent:"center"}}>
+                                <button type="submit" className='btn'>Update Budget</button>
+                                <button type="button" id="clear" className='btn' onClick={()=>newTracker()}>Start new tracker</button>
+                                <button type="button" className='btn' onClick={()=>navigate("/tracker")}>Go back</button>
+                            </div>
+                            }
                         </div>
                     </form>
                 </div>
