@@ -4,12 +4,12 @@ const userSlice = createSlice({
 
     name: "user",
     initialState: {
-        userName : "",
-        monthlyBudget : "",
+        userName : "Inkersal",
+        monthlyBudget : "5000",
         categoricalBudget: {
-            food :"",
-            travel :"",
-            entertainment :"",
+            food :"3000",
+            travel :"1000",
+            entertainment :"900",
         },
         editMonthlyBudget: false,
         activeFilter: "all",

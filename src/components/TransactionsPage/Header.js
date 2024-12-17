@@ -6,13 +6,13 @@ import { updateEditMonthlyBudget } from '../../redux/userSlice';
 function Header() {
 
     const navigate = useNavigate();
-    const username = useSelector((state) => state.user.username);
+    const userName = useSelector((state) => state.user.userName);
     const dispatch = useDispatch();
 
     return (
         <div className='p-2'>
             <div style={{display:'flex', justifyContent:"space-between"}}>
-                <h2> {username}'s Monthly Expenditure</h2>
+                <h2> {userName}'s Monthly Expenditure</h2>
                 <button type="button" id="new-update" onClick={()=>{dispatch(updateEditMonthlyBudget(true));navigate("/");}} className='btn'>New/Update Tracker</button>
             </div>
         </div>

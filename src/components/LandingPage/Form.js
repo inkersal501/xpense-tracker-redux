@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserName, updateMonthlyBudget, updateCategoricalBudget, updateEditMonthlyBudget, resetAllBudget } from "../../redux/userSlice";
 import { useNavigate } from 'react-router-dom';
-import { budgetCategories as categories } from '../../categories';
+import { categories } from '../../categories';
 import toast from 'react-hot-toast';
 
 function Form() {
