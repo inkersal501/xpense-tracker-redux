@@ -13,7 +13,7 @@ function ExpenseForm() {
     const [expenseName, setExpenseName] = useState("");
     const [category, setCategory] = useState("");
     const [expenseAmount, setExpenseAmount] = useState("");
-    const transactionList =  useSelector((state)=> state.transaction.transactionList);
+    const transactionList =  useSelector((state)=> state.transactions.transactionList);
 
     const validateForm = () => { 
         let alertMsg = ""; 
@@ -41,7 +41,7 @@ function ExpenseForm() {
                 dispatch(addTransactionEntry({
                     id: newId, 
                     name: expenseName, 
-                    amount: expenseAmount, 
+                    amount: parseInt(expenseAmount), 
                     category: category
                 }));
                 const updateTotal = { amount: expenseAmount, operation: "add" };
@@ -56,20 +56,22 @@ function ExpenseForm() {
     };
     return (
         <div style={{margin: "40px 0px"}}>
-            <h3 className='title'>New Expense Form</h3>
+            
             <form onSubmit={handleSubmit} className='expense-form1'>
+                <div className='title'>New Expense Form</div>
                 <div style={{display:"flex", gap:"40px", }}>
                     <div>
                         <label htmlFor='expense-name'>Expense Name:</label>
                         <input type="text" id="expense-name" onChange={(e)=>setExpenseName(e.target.value)} value={expenseName} className='formInput'/>
                     </div>
                     <div>
-                        <label htmlFor='category-select'>Select Category:</label>
+                        <label htmlFor='category-select'>Select category:</label>
                         <select id="category-select" onChange={(e)=>setCategory(e.target.value)} value={category} className='formInput'>
                             <option value={""}>--select--</option>
                             {categories.map((cat, index)=>(
                                 <option key={index} value={cat.id}>{cat.name}</option>
                             ))}
+                            <option value="others">Others</option>
                         </select>
                     </div>                     
                 </div>

@@ -6,8 +6,8 @@ import transactionSlice from './transactionSlice';
 const store = configureStore({
   reducer: {
     user : userSlice,
-    expense: expenseSlice,
-    transaction: transactionSlice,
+    expense : expenseSlice,
+    transactions : transactionSlice,
   },
 });
 

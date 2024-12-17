@@ -76,6 +76,9 @@ main {
 }
 .title{
     text-decoration: underline;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0px 0px 20px 0px;
 }
 .success-btn{
     padding: 8px 16px;

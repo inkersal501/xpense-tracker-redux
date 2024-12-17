@@ -57,10 +57,12 @@ function MonthlyExpenditure() {
                     ))}
                     <tr>
                         <td>Others</td>
-                        <td></td>
-                        <td>{monthlyBudget}</td>
-                        <td>{""}</td>
-                        <td>{""}</td>
+                        <td>
+                            <button className={getStatusColor(categoricalBudget.others, categoricalExpense.others)}>{getStatus(categoricalBudget.others, categoricalExpense.others)}</button>
+                        </td>
+                        <td>{categoricalBudget.others}</td>
+                        <td>{categoricalExpense.others}</td>
+                        <td>{getBalance(categoricalBudget.others, categoricalExpense.others)}</td>
                     </tr>
                 </tbody>
             </table>

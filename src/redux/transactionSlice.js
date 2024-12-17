@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const transactionSlice = createSlice({
-    name: "transaction",
+    name: "transactions",
     initialState: {
         transactionList:[]
     },
