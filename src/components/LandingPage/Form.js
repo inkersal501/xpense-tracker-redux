@@ -60,40 +60,33 @@ function Form() {
     return (
         <div className='budgetform'>
             <div className=''>
-                <h3 className='text-center'>Welcome to your own expense tracker</h3>
-                <h4 className='text-center'>Please fill in the below form to start tracking</h4>
+                <h2 className='text-center' style={{margin:"0px"}}>Welcome to your own expense tracker</h2>
+                <h3 className='text-center'>Please fill in the below form to start tracking</h3>
                 <div className='budgetformBox'>
                     <form name="landing-page-form" onSubmit={handleSubmit}>
-                        <div className='inputBox'>
-                            <label htmlFor='name'>Enter your name: </label>
-                            <input type="text" id="name" className='formInput' onChange={(e)=>dispatch(updateUserName(e.target.value))} value={userName}/>
-                        </div>
-                        <div className='inputBox'>
-                            <label htmlFor='budget'>Enter your monthly budget: </label>
-                            <input type="text" id="budget" className='formInput' onChange={(e)=>dispatch(updateMonthlyBudget(parseInt(e.target.value)))} value={monthlyBudget}/>
+                        <div style={{display:"flex", gap:"20px", justifyContent:"center"}}>
+                            <div className='inputBox form-group'>
+                                <label htmlFor='name'>Name </label>
+                                <input type="text" id="name" className='formInput' onChange={(e)=>dispatch(updateUserName(e.target.value))} value={userName} placeholder='Enter your name'/>
+                            </div>
+                            <div className='inputBox form-group'>
+                                <label htmlFor='budget'>Monthly Budget </label>
+                                <input type="text" id="budget" className='formInput' onChange={(e)=>dispatch(updateMonthlyBudget(parseInt(e.target.value)))} value={monthlyBudget} placeholder='Enter your monthly budget'/>
+                            </div>
                         </div>
                         <div>
-                            <label>Fill your monthly categorical budget: </label>
-                            <table border="1" cellSpacing="0" className='table'>
-                                <thead>
-                                    <tr>
-                                        {categories.map((cat, index)=>(
-                                            <th key={index}>{cat.name}</th>
-                                        ))} 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        {categories.map((cat, index)=>(
-                                            <td key={index}>
-                                                <input type="text" id={cat.id} className='formInput' onChange={(e)=>dispatch(updateCategoricalBudget({[cat.id]: parseInt(e.target.value)}))} value={categoricalBudget[cat.id]}/>
-                                            </td> 
-                                        ))} 
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <label style={{fontWeight:"bold"}}>Monthly Categorical Budget: </label>
+
+                            <div style={{display:"flex", gap:"20px", justifyContent:"center", margin:"10px 0px"}}>
+                                {categories.map((cat, index)=>(
+                                     <div key={index} className='inputBox form-group'>
+                                        <label htmlFor={cat.id}>{cat.name}</label>
+                                        <input type="text" id={cat.id} className='formInput' onChange={(e)=>dispatch(updateCategoricalBudget({[cat.id]: parseInt(e.target.value)}))} value={categoricalBudget[cat.id]} placeholder={cat.name}/>
+                                    </div> 
+                                ))} 
+                            </div> 
                         </div>
-                        <div className='text-center pt-1'>
+                        <div className='text-center'>
                             {!editMonthlyBudget ?
                                 <button type="submit" className='btn'>Submit</button>
                             :

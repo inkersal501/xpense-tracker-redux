@@ -55,31 +55,30 @@ function ExpenseForm() {
         }
     };
     return (
-        <div style={{margin: "40px 0px"}}>
-            
+        <div style={{margin: "40px 0px"}}>            
             <form onSubmit={handleSubmit} className='expense-form1'>
                 <div className='title'>New Expense Form</div>
-                <div style={{display:"flex", gap:"40px", }}>
-                    <div>
-                        <label htmlFor='expense-name'>Expense Name:</label>
-                        <input type="text" id="expense-name" onChange={(e)=>setExpenseName(e.target.value)} value={expenseName} className='formInput'/>
+                <div style={{display:"flex", gap:"20px", }}>
+                    <div className='inputBox form-group'>
+                        <label htmlFor='expense-name'>Expense Name</label>
+                        <input type="text" id="expense-name" onChange={(e)=>setExpenseName(e.target.value)} value={expenseName} className='formInput' placeholder='Expense For'/>
                     </div>
-                    <div>
-                        <label htmlFor='category-select'>Select category:</label>
+                    <div className='inputBox form-group'>
+                        <label htmlFor='category-select'>Category</label>
                         <select id="category-select" onChange={(e)=>setCategory(e.target.value)} value={category} className='formInput'>
-                            <option value={""}>--select--</option>
+                            <option value={""}>Select Category</option>
                             {categories.map((cat, index)=>(
                                 <option key={index} value={cat.id}>{cat.name}</option>
                             ))}
                             <option value="others">Others</option>
                         </select>
-                    </div>                     
-                </div>
-                <div style={{margin: "20px 0px 0px 0px"}}>
-                    <label htmlFor='expense-amount'>Expense Amount:</label>
-                    <input type="text" id="expense-amount" onChange={(e)=>setExpenseAmount(e.target.value)} value={expenseAmount} className='formInput'/>
-                </div>
-                <div className='text-center pt-1'>
+                    </div> 
+                    <div className='inputBox form-group'>
+                        <label htmlFor='expense-amount'>Expense Amount</label>
+                        <input type="text" id="expense-amount" onChange={(e)=>setExpenseAmount(e.target.value)} value={expenseAmount} className='formInput' placeholder='Amount'/>
+                    </div>                    
+                </div>                
+                <div className='text-center'>
                     <button type="submit" className='btn'>Submit</button>
                 </div>
             </form>

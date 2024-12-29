@@ -49,11 +49,11 @@ function ExpensesList() {
                 <tbody>
                     {transactions.map((transaction, index)=>(
                         <tr key={index}>
-                            <td>{index+1}</td>
+                            <td className='text-center'>{index+1}</td>
                             <td>{transaction.name}</td>
                             <td>{capitalize(transaction.category)}</td>
-                            <td>{transaction.amount}</td>
-                            <td><button type='button' className='btn' onClick={()=>deleteEntry(transaction.id, transaction.amount, transaction.category)}>Delete</button></td>
+                            <td className='text-center'>{transaction.amount}</td>
+                            <td className='text-center'><button type='button' className='btn' onClick={()=>deleteEntry(transaction.id, transaction.amount, transaction.category)}>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>

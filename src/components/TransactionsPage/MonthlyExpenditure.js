@@ -16,7 +16,7 @@ function MonthlyExpenditure() {
     }
     const getStatus = (budget, expense) => {
 
-        return expense<budget?"within":"not within";
+        return expense<budget?"Within":"Not within";
     }
     const getStatusColor = (budget, expense) => {
         return expense<budget?"success-btn":"danger-btn";
@@ -24,7 +24,7 @@ function MonthlyExpenditure() {
     
     return (
         <div className='p-2'>
-            <table className='table' cellSpacing="0" border="1">
+            <table className='table' cellSpacing="0">
                 <thead>
                     <tr>
                         <th>Category</th>
@@ -37,7 +37,7 @@ function MonthlyExpenditure() {
                 <tbody>
                     <tr>
                         <td>All</td>
-                        <td>
+                        <td className='text-center'>
                             <button className={getStatusColor(monthlyBudget, totalExpense)}>{getStatus(monthlyBudget, totalExpense)}</button>
                         </td>
                         <td>{monthlyBudget}</td>
@@ -47,7 +47,7 @@ function MonthlyExpenditure() {
                     {categories.map((cat, index)=>(
                         <tr key={index}>
                             <td>{cat.name}</td>
-                            <td>
+                            <td className='text-center'>
                                 <button className={getStatusColor(categoricalBudget[cat.id], categoricalExpense[cat.id])}>{getStatus(categoricalBudget[cat.id], categoricalExpense[cat.id])}</button>
                             </td>
                             <td>{categoricalBudget[cat.id]}</td>
@@ -57,7 +57,7 @@ function MonthlyExpenditure() {
                     ))}
                     <tr>
                         <td>Others</td>
-                        <td>
+                        <td className='text-center'>
                             <button className={getStatusColor(categoricalBudget.others, categoricalExpense.others)}>{getStatus(categoricalBudget.others, categoricalExpense.others)}</button>
                         </td>
                         <td>{categoricalBudget.others}</td>

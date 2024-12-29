@@ -10,10 +10,12 @@ function Header() {
     const dispatch = useDispatch();
 
     return (
-        <div className='p-2'>
-            <div style={{display:'flex', justifyContent:"space-between"}}>
-                <h2> {userName}'s Monthly Expenditure</h2>
-                <button type="button" id="new-update" onClick={()=>{dispatch(updateEditMonthlyBudget(true));navigate("/");}} className='btn'>New/Update Tracker</button>
+        <div>
+            <div style={{display:'flex', justifyContent:"space-between", alignItems:"center"}}>
+                <h3 style={{margin:"0px"}}> {userName}'s Monthly Expenditure</h3>
+                <div>
+                    <button type="button" id="new-update" onClick={()=>{dispatch(updateEditMonthlyBudget(true));navigate("/");}} className='btn'>New/Update Tracker</button>
+                </div>
             </div>
         </div>
     )
